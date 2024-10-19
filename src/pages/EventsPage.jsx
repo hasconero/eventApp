@@ -1,6 +1,7 @@
 import React from "react";
 import { Heading, Image } from "@chakra-ui/react";
 import { useLoaderData, Link } from "react-router-dom";
+import { useState } from "react";
 
 export const loader = async () => {
   const users = await fetch("http://localhost:3000/users");
@@ -25,7 +26,9 @@ export const EventsPage = () => {
 
   return (
     <div>
-      <Heading>List of events</Heading>
+      <Heading fontSize={"2xl"} color="green.600">
+        List of events
+      </Heading>
       {events.map((event) => (
         <div key={event.id}>
           <Link to={`event/${event.id}`}>
