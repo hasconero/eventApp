@@ -11,7 +11,7 @@ import {
 import { AddEventForm } from "./AddEventForm";
 import { Button } from "./ui/Button";
 
-export const AddEventModal = ({ isOpen, onClose, onSubmit }) => {
+export const AddEventModal = ({ isOpen, onClose, onSubmit, categories }) => {
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
@@ -19,7 +19,12 @@ export const AddEventModal = ({ isOpen, onClose, onSubmit }) => {
         <ModalHeader>Add New Event</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
-          <AddEventForm onSubmit={onSubmit} onClose={onClose} />
+          {/* Pass categories to AddEventForm */}
+          <AddEventForm
+            onSubmit={onSubmit}
+            onClose={onClose}
+            categories={categories}
+          />
         </ModalBody>
 
         <ModalFooter>
