@@ -7,6 +7,7 @@ import {
   Stack,
   SimpleGrid,
   Center,
+  Tag,
 } from "@chakra-ui/react";
 import { useLoaderData } from "react-router-dom";
 
@@ -60,9 +61,16 @@ export const EventPage = () => {
             <Text>End Time: {new Date(event.endTime).toLocaleString()}</Text>
             <Text as="i" color="gray.600">
               Categories:{" "}
-              {event.categoryIds
-                .map((id) => categories.find((cat) => cat.id === id)?.name)
-                .join(", ")}
+              {event.categoryIds.map((id) => {
+                const categoryName = categories.find(
+                  (cat) => cat.id === id
+                )?.name;
+                return categoryName ? (
+                  <Tag key={id} colorScheme="teal" mr={2}>
+                    {categoryName}
+                  </Tag>
+                ) : null;
+              })}
             </Text>
           </Stack>
 
