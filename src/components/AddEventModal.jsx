@@ -9,7 +9,7 @@ import {
   ModalCloseButton,
 } from "@chakra-ui/react";
 import { AddEventForm } from "./AddEventForm";
-import { Button } from "./Button"; // Assuming Button component is used
+import { Button } from "./ui/Button";
 
 export const AddEventModal = ({ isOpen, onClose, onSubmit }) => {
   return (
