@@ -1,29 +1,42 @@
 import React from "react";
-import { Link as RouterLink } from "react-router-dom";
+import { NavLink as RouterNavLink, Link as RouterLink } from "react-router-dom";
 import { Box, Flex, HStack, Link, Heading } from "@chakra-ui/react";
 
 export const Navigation = () => {
   return (
     <Box bg="teal.500" px={4} mb={6}>
       <Flex h={16} alignItems="center" justifyContent="space-between">
-        <Heading as={RouterLink} to="/" size="lg" color="white">
+        {/* Clickable Heading (Logo) */}
+        <Heading
+          as={RouterLink}
+          to="/"
+          size="lg"
+          color="white"
+          _hover={{ textDecoration: "none" }}
+        >
           Event Manager
         </Heading>
 
+        {/* Navigation Links */}
         <HStack as="nav" spacing={4}>
+          {/* Active link styling using NavLink */}
           <Link
-            as={RouterLink}
+            as={RouterNavLink}
             to="/"
             color="white"
             _hover={{ textDecoration: "none", color: "teal.200" }}
+            _activeLink={{ color: "teal.200" }} // Active link styling
+            end // Ensures exact matching for "/"
           >
             Events
           </Link>
+
           <Link
-            as={RouterLink}
+            as={RouterNavLink}
             to="/event/1"
             color="white"
             _hover={{ textDecoration: "none", color: "teal.200" }}
+            _activeLink={{ color: "teal.200" }} // Active link styling
           >
             Event
           </Link>
