@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { TextInput } from "./ui/TextInput";
-import { Select } from "@chakra-ui/react";
-// import { Link } from "react-router-dom";
+import { Flex, Box, Select } from "@chakra-ui/react";
 
 export const EventSearch = ({ events, setFilteredEvents, categories }) => {
   const [searchField, setSearchField] = useState("");
@@ -41,23 +40,45 @@ export const EventSearch = ({ events, setFilteredEvents, categories }) => {
   };
 
   return (
-    <>
-      <label>Search for events:</label>
-      <TextInput onChange={handleChange} w={200} mb={8} value={searchField} />
-
-      {/* Dropdown for category filter */}
-      <label>Filter by category:</label>
-      <Select
-        placeholder="Select category"
-        onChange={handleCategoryChange}
-        mb={8}
+    <Box w="100%" mb={8}>
+      {/* Flex container for aligning search and filter */}
+      <Flex
+        mb={4}
+        justifyContent="space-between"
+        alignItems="center"
+        flexWrap="wrap" // Ensures proper wrap on smaller screens
       >
-        {categories.map((category) => (
-          <option key={category.id} value={category.id}>
-            {category.name}
-          </option>
-        ))}
-      </Select>
-    </>
+        <Box flex="1" maxW="300px" mr={4}>
+          <label htmlFor="search" style={{ marginRight: "8px" }}>
+            Search for events:
+          </label>
+          <TextInput
+            id="search"
+            onChange={handleChange}
+            w="100%"
+            value={searchField}
+            placeholder="Search..."
+          />
+        </Box>
+
+        <Box flex="1" maxW="300px">
+          <label htmlFor="filter" style={{ marginRight: "8px" }}>
+            Filter by category:
+          </label>
+          <Select
+            id="filter"
+            placeholder="Select category"
+            onChange={handleCategoryChange}
+            w="100%"
+          >
+            {categories.map((category) => (
+              <option key={category.id} value={category.id}>
+                {category.name}
+              </option>
+            ))}
+          </Select>
+        </Box>
+      </Flex>
+    </Box>
   );
 };
