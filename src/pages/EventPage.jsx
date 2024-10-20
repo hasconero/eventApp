@@ -8,8 +8,9 @@ import {
   SimpleGrid,
   Center,
   Tag,
+  Button,
 } from "@chakra-ui/react";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, Link as RouterLink } from "react-router-dom";
 
 export const loader = async ({ params }) => {
   const users = await fetch("http://localhost:3000/users");
@@ -72,16 +73,22 @@ export const EventPage = () => {
                 ) : null;
               })}
             </Text>
+            <Button as={RouterLink} to="/" colorScheme="teal" mb={4}>
+              Back to Events
+            </Button>
           </Stack>
 
-          {/* Event image */}
-          <Image
-            src={event.image}
-            alt={event.title}
-            boxSize={{ base: "100%", md: "300px" }} // Responsive sizing
-            borderRadius="md"
-            objectFit="cover"
-          />
+          {event.image ? (
+            <Image
+              src={event.image}
+              alt={event.title}
+              boxSize={{ base: "100%", md: "300px" }}
+              borderRadius="md"
+              objectFit="cover"
+            />
+          ) : (
+            <Text>No image available</Text>
+          )}
         </SimpleGrid>
       </Box>
     </Center>

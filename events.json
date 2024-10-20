@@ -200,6 +200,19 @@
       ],
       "createdBy": 2,
       "id": 15
+    },
+    {
+      "title": "Test",
+      "description": "No picture",
+      "image": "",
+      "startTime": "2024-10-22T00:03",
+      "endTime": "2024-10-23T00:03",
+      "categoryIds": [
+        2,
+        1
+      ],
+      "createdBy": 1,
+      "id": 16
     }
   ],
   "categories": [

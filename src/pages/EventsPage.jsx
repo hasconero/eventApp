@@ -6,6 +6,7 @@ import {
   Text,
   Box,
   SimpleGrid,
+  Tag,
 } from "@chakra-ui/react";
 import { useLoaderData, Link } from "react-router-dom";
 import { EventSearch } from "../components/EventSearch";
@@ -52,7 +53,12 @@ export const EventsPage = () => {
   const getCategories = (categoryIds) => {
     return categoryIds
       .map((id) => categories.find((cat) => cat.id === id)?.name)
-      .join(", ");
+      .filter(Boolean) // Filter out any undefined names
+      .map((categoryName) => (
+        <Tag key={categoryName} colorScheme="teal" mr={2}>
+          {categoryName}
+        </Tag>
+      ));
   };
 
   return (
@@ -111,12 +117,17 @@ export const EventsPage = () => {
                   Created by:{" "}
                   {users.find((user) => event.createdBy === user.id)?.name}
                 </Text>
-                <Image
-                  src={event.image}
-                  alt={event.title}
-                  boxSize={{ base: "100%", md: "150px" }}
-                  mb={2}
-                />
+
+                {event.image ? (
+                  <Image
+                    src={event.image}
+                    alt={event.title}
+                    boxSize={{ base: "100%", md: "150px" }}
+                    mb={2}
+                  />
+                ) : (
+                  <Text mb={8}>No image available</Text>
+                )}
                 <Text>
                   Start Time: {new Date(event.startTime).toLocaleString()}
                 </Text>
