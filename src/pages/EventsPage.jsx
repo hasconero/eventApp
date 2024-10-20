@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Heading, Image, Center } from "@chakra-ui/react";
+import { Heading, Image, Center, Text } from "@chakra-ui/react";
 import { useLoaderData, Link } from "react-router-dom";
 import { EventSearch } from "../components/EventSearch";
 
@@ -27,9 +27,7 @@ export const EventsPage = () => {
 
   return (
     <Center flexDir="column">
-      <Heading fontSize={"2xl"} color="green.600">
-        List of events
-      </Heading>
+      <Heading color="green.600">List of events</Heading>
 
       <EventSearch
         events={events}
@@ -41,17 +39,19 @@ export const EventsPage = () => {
         filteredEvents.map((event) => (
           <div key={event.id}>
             <Link to={`event/${event.id}`}>
-              <h2>{event.title}</h2>
+              <Heading size="md">{event.title}</Heading>
             </Link>
-            <p>{event.description}</p>
+            <Text as="b">{event.description}</Text>
             <Image src={event.image} alt={event.title} boxSize="150px" />
-            <p>Start Time: {new Date(event.startTime).toLocaleString()}</p>
-            <p>End Time: {new Date(event.endTime).toLocaleString()}</p>
-            <p>Categories: {getCategories(event.categoryIds)}</p>
-            <p>
+            <Text>
+              Start Time: {new Date(event.startTime).toLocaleString()}
+            </Text>
+            <Text>End Time: {new Date(event.endTime).toLocaleString()}</Text>
+            <Text>Categories: {getCategories(event.categoryIds)}</Text>
+            <Text>
               Created by:{" "}
               {users.find((user) => event.createdBy === user.id)?.name}
-            </p>
+            </Text>
           </div>
         ))
       ) : (
