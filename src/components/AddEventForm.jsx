@@ -35,10 +35,11 @@ export const AddEventForm = ({
   };
 
   const handleCategoryChange = (categoryId) => {
+    const categoryIdString = String(categoryId); // Handle IDs as strings
     setNewEvent((prevEvent) => {
-      const categoryIds = prevEvent.categoryIds.includes(categoryId)
-        ? prevEvent.categoryIds.filter((id) => id !== categoryId)
-        : [...prevEvent.categoryIds, categoryId];
+      const categoryIds = prevEvent.categoryIds.includes(categoryIdString)
+        ? prevEvent.categoryIds.filter((id) => id !== categoryIdString)
+        : [...prevEvent.categoryIds, categoryIdString];
       return {
         ...prevEvent,
         categoryIds,
@@ -48,7 +49,12 @@ export const AddEventForm = ({
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    onSubmit(newEvent);
+    // Convert category IDs back to numbers before submitting
+    const formattedEvent = {
+      ...newEvent,
+      categoryIds: newEvent.categoryIds.map((id) => Number(id)), // Convert back to numbers
+    };
+    onSubmit(formattedEvent); // Submit form data to the parent component
     onClose();
   };
 
@@ -115,9 +121,9 @@ export const AddEventForm = ({
             categories.map((category) => (
               <Checkbox
                 key={category.id}
-                value={category.id}
+                value={String(category.id)} // Use strings for handling in the UI
                 onChange={() => handleCategoryChange(category.id)}
-                isChecked={newEvent.categoryIds.includes(category.id)}
+                isChecked={newEvent.categoryIds.includes(String(category.id))} // Compare as strings
               >
                 {category.name}
               </Checkbox>
