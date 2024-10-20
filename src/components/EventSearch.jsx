@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { EventsPage } from "./DrinkItems";
 import { TextInput } from "./ui/TextInput";
+import { EventsPage } from "../pages/EventPage";
 
 export const EventSearch = () => {
   return (
