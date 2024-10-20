@@ -1,20 +1,26 @@
 import { useState } from "react";
 
-export const EventForm = ({ createEvent }) => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [website, setWebsite] = useState("");
+export const editEventForm = ({ editEvent }) => {
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [image, setImage] = useState("");
+  const [startTime, setStartTime] = useState("");
+  const [endTime, setEndTime] = useState("");
+  const [categories, setCategories] = useState("");
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
     // An async function, but no need to wait for it.
-    createUser({ name, email, website });
+    editEvent({ title, description, image, startTime, endTime, categories });
 
     // Empty the form fields.
-    setName("");
-    setEmail("");
-    setWebsite("");
+    setTitle("");
+    setDescription("");
+    setImage("");
+    setStartTime("");
+    setEndTime("");
+    setCategories("");
   };
 
   return (
