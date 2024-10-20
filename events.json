@@ -18,7 +18,9 @@
       "title": "Trampoline party",
       "description": "Bounce around with your friends",
       "image": "https://i.pinimg.com/736x/3d/2f/af/3d2faf4e3188d34a9fcdc00df59e77b0.jpg",
-      "categoryIds": [2],
+      "categoryIds": [
+        2
+      ],
       "location": "My back yard",
       "startTime": "2023-03-10T18:00",
       "endTime": "2023-03-10T17:00:00.000Z"
@@ -29,7 +31,9 @@
       "title": "Laser Tag mania",
       "description": "Let's play laser tag!",
       "image": "https://www.ctvnews.ca/polopoly_fs/1.5118552.1600965663!/httpImage/image.jpg_gen/derivatives/landscape_1020/image.jpg",
-      "categoryIds": [2],
+      "categoryIds": [
+        2
+      ],
       "location": "Blinded by the Lights Laser Tag, 15 Main St.",
       "startTime": "2023-04-06T18:46",
       "endTime": "2023-04-06T17:46"
@@ -40,7 +44,10 @@
       "title": "Badminton game",
       "description": "Hit that shuttle!",
       "image": "https://wincacademy.github.io/webpages/media/pexels-vladvictoria-2202685.jpg",
-      "categoryIds": [1, 2],
+      "categoryIds": [
+        1,
+        2
+      ],
       "location": "The Park",
       "startTime": "2023-03-15T12:00:00.000Z",
       "endTime": "2023-03-15T13:30:00.000Z"
@@ -51,7 +58,9 @@
       "title": "Yoga",
       "description": "It's a bit of a stretch.",
       "image": "https://wincacademy.github.io/webpages/media/pexels-gabby-k-5384538.jpg",
-      "categoryIds": [3],
+      "categoryIds": [
+        3
+      ],
       "location": "Shavasana Yoga School",
       "startTime": "2023-03-09T06:00:00.000Z",
       "endTime": "2023-03-09T07:00:00.000Z"
@@ -62,7 +71,9 @@
       "image": "https://i.guim.co.uk/img/media/323787424f69df0165e273dff9226f3145b13607/48_326_2768_1661/master/2768.jpg",
       "startTime": "2024-10-21T16:00",
       "endTime": "2024-10-21T20:00",
-      "categoryIds": [3],
+      "categoryIds": [
+        3
+      ],
       "createdBy": 1,
       "id": 5
     },
@@ -72,7 +83,10 @@
       "image": "https://www.skh.com/wp-content/uploads/2023/06/SKHGrillingMeats3-min.jpg",
       "startTime": "2024-10-22T17:14",
       "endTime": "2024-10-27T17:14",
-      "categoryIds": [1, 2],
+      "categoryIds": [
+        1,
+        2
+      ],
       "createdBy": "Hasco Nero",
       "id": 6
     },
@@ -92,7 +106,10 @@
       "image": "https://images0.persgroep.net/rcs/YA18LcnFbXiZLTOyYIMfu6TxDSA/diocontent/107915994/_fitwidth/694/",
       "startTime": "2024-10-21T22:51",
       "endTime": "2024-10-24T22:51",
-      "categoryIds": [3, 2],
+      "categoryIds": [
+        3,
+        2
+      ],
       "createdBy": "1",
       "id": 8
     },
@@ -102,7 +119,9 @@
       "image": "https://images0.persgroep.net/rcs/YA18LcnFbXiZLTOyYIMfu6TxDSA/diocontent/107915994/_fitwidth/694/?appId=21791a8992982cd8da851550a453bd7f&quality=0.8&desiredformat=webp",
       "startTime": "2024-10-28T22:52",
       "endTime": "2024-10-29T22:52",
-      "categoryIds": [1],
+      "categoryIds": [
+        1
+      ],
       "createdBy": "1",
       "id": 9
     },
@@ -112,7 +131,10 @@
       "image": "https://upload.wikimedia.org/wikipedia/commons/e/e4/Joost_koekhappen.JPG",
       "startTime": "2024-10-21T23:06",
       "endTime": "2024-10-22T23:06",
-      "categoryIds": [2, 1],
+      "categoryIds": [
+        2,
+        1
+      ],
       "createdBy": "1",
       "id": 10
     },
@@ -122,9 +144,62 @@
       "image": "https://upload.wikimedia.org/wikipedia/commons/e/e4/Joost_koekhappen.JPG",
       "startTime": "2024-10-30T23:12",
       "endTime": "2024-11-01T23:12",
-      "categoryIds": [1, 2],
+      "categoryIds": [
+        1,
+        2
+      ],
       "createdBy": "2",
       "id": 11
+    },
+    {
+      "title": "Spijkerpoepen",
+      "description": "We poepen spijkers met koppen",
+      "image": "https://doenkids.nl/cache/half/koningsspelen/doenkids-koningsdag-29[1].jpg",
+      "startTime": "2024-10-21T23:21",
+      "endTime": "2024-10-22T23:21",
+      "categoryIds": [],
+      "createdBy": 1,
+      "id": 12
+    },
+    {
+      "title": "test3",
+      "description": "test3",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/e/e4/Joost_koekhappen.JPG",
+      "startTime": "2024-10-20T23:34",
+      "endTime": "2024-10-21T23:34",
+      "categoryIds": [
+        1,
+        2
+      ],
+      "createdBy": 1,
+      "id": 13
+    },
+    {
+      "title": "test4",
+      "description": "test4",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/e/e4/Joost_koekhappen.JPG",
+      "startTime": "2024-10-21T23:39",
+      "endTime": "2024-10-22T23:39",
+      "categoryIds": [
+        "1",
+        "2",
+        "3"
+      ],
+      "createdBy": 1,
+      "id": 14
+    },
+    {
+      "title": "Koek",
+      "description": "koek",
+      "image": "https://doenkids.nl/cache/half/koningsspelen/doenkids-koningsdag-8.jpg",
+      "startTime": "2024-10-20T23:45",
+      "endTime": "2024-10-21T23:45",
+      "categoryIds": [
+        2,
+        3
+      ],
+      "createdBy": 2,
+      "id": 15
     }
   ],
   "categories": [
