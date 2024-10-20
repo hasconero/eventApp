@@ -42,16 +42,16 @@ export const EventsPage = () => {
               <Heading size="md">{event.title}</Heading>
             </Link>
             <Text as="b">{event.description}</Text>
+            <Text>
+              Created by:{" "}
+              {users.find((user) => event.createdBy === user.id)?.name}
+            </Text>
             <Image src={event.image} alt={event.title} boxSize="150px" />
             <Text>
               Start Time: {new Date(event.startTime).toLocaleString()}
             </Text>
             <Text>End Time: {new Date(event.endTime).toLocaleString()}</Text>
-            <Text>Categories: {getCategories(event.categoryIds)}</Text>
-            <Text>
-              Created by:{" "}
-              {users.find((user) => event.createdBy === user.id)?.name}
-            </Text>
+            <Text as="i">Categories: {getCategories(event.categoryIds)}</Text>
           </div>
         ))
       ) : (

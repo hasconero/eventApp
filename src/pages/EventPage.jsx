@@ -1,5 +1,5 @@
 import React from "react";
-import { Heading, Image } from "@chakra-ui/react";
+import { Heading, Image, Text } from "@chakra-ui/react";
 import { useLoaderData } from "react-router-dom";
 
 export const loader = async ({ params }) => {
@@ -29,19 +29,19 @@ export const EventPage = () => {
 
   return (
     <div>
-      <Heading>Event Details</Heading>
-      <h1>{event.title}</h1>
-      <p>by {users.find((user) => user.id === event.createdBy)?.name}</p>
-      <p>{event.description}</p>
+      <Heading color="green.600">Event Details</Heading>
+      <Heading size="md">{event.title}</Heading>
+      <Text>by {users.find((user) => user.id === event.createdBy)?.name}</Text>
+      <Text as="b">{event.description}</Text>
       <Image src={event.image} alt={event.title} boxSize="300px" />
-      <p>Start Time: {new Date(event.startTime).toLocaleString()}</p>
-      <p>End Time: {new Date(event.endTime).toLocaleString()}</p>
-      <p>
+      <Text>Start Time: {new Date(event.startTime).toLocaleString()}</Text>
+      <Text>End Time: {new Date(event.endTime).toLocaleString()}</Text>
+      <Text as="i">
         Categories:{" "}
         {event.categoryIds
           .map((id) => categories.find((cat) => cat.id === id)?.name)
           .join(", ")}
-      </p>
+      </Text>
     </div>
   );
 };
