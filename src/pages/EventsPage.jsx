@@ -31,6 +31,7 @@ export const EventsPage = () => {
 
   // Handle adding new event (POST to server)
   const handleAddEvent = async (newEvent) => {
+    console.log(newEvent);
     try {
       const response = await fetch("http://localhost:3000/events", {
         method: "POST",
@@ -80,6 +81,7 @@ export const EventsPage = () => {
           onClose={() => setIsModalOpen(false)}
           onSubmit={handleAddEvent}
           categories={categories} // Pass categories to the modal
+          users={users}
         />
         {/* Display events as a responsive grid */}
         {filteredEvents.length > 0 ? (
