@@ -1,8 +1,14 @@
 import React, { useState } from "react";
-import { Input, FormLabel } from "@chakra-ui/react";
+import {
+  Input,
+  FormLabel,
+  CheckboxGroup,
+  Checkbox,
+  Stack,
+} from "@chakra-ui/react";
 import { Button } from "./ui/Button";
 
-export const AddEventForm = ({ onSubmit, onClose }) => {
+export const AddEventForm = ({ onSubmit, onClose, categories }) => {
   const [newEvent, setNewEvent] = useState({
     title: "",
     description: "",
@@ -10,7 +16,7 @@ export const AddEventForm = ({ onSubmit, onClose }) => {
     startTime: "",
     endTime: "",
     categoryIds: [],
-    createdBy: 1, // Defaulting to the first user for simplicity
+    createdBy: "", // Allow the user to input their name
   });
 
   const handleInputChange = (e) => {
@@ -19,6 +25,18 @@ export const AddEventForm = ({ onSubmit, onClose }) => {
       ...prevEvent,
       [name]: value,
     }));
+  };
+
+  const handleCategoryChange = (categoryId) => {
+    setNewEvent((prevEvent) => {
+      const categoryIds = prevEvent.categoryIds.includes(categoryId)
+        ? prevEvent.categoryIds.filter((id) => id !== categoryId)
+        : [...prevEvent.categoryIds, categoryId];
+      return {
+        ...prevEvent,
+        categoryIds,
+      };
+    });
   };
 
   const handleFormSubmit = (e) => {
@@ -69,18 +87,31 @@ export const AddEventForm = ({ onSubmit, onClose }) => {
         onChange={handleInputChange}
       />
 
-      <FormLabel>Category IDs (comma-separated)</FormLabel>
+      {/* Input field for creator's name */}
+      <FormLabel>Creator</FormLabel>
       <Input
-        placeholder="Category IDs"
-        name="categoryIds"
-        value={newEvent.categoryIds}
-        onChange={(e) =>
-          setNewEvent({
-            ...newEvent,
-            categoryIds: e.target.value.split(",").map(Number), // Convert to array of numbers
-          })
-        }
+        placeholder="Creator's Name"
+        name="createdBy"
+        value={newEvent.createdBy}
+        onChange={handleInputChange}
       />
+
+      {/* Category checkboxes */}
+      <FormLabel>Select Categories</FormLabel>
+      <CheckboxGroup>
+        <Stack>
+          {categories.map((category) => (
+            <Checkbox
+              key={category.id}
+              value={category.id}
+              onChange={() => handleCategoryChange(category.id)}
+              isChecked={newEvent.categoryIds.includes(category.id)}
+            >
+              {category.name}
+            </Checkbox>
+          ))}
+        </Stack>
+      </CheckboxGroup>
 
       <Button colorScheme="teal" type="submit" mt={4}>
         Save Event
