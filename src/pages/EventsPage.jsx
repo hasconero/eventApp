@@ -1,5 +1,4 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 import { Heading, Image, Center } from "@chakra-ui/react";
 import { useLoaderData, Link } from "react-router-dom";
 import { EventSearch } from "../components/EventSearch";
@@ -32,7 +31,11 @@ export const EventsPage = () => {
         List of events
       </Heading>
 
-      <EventSearch events={events} setFilteredEvents={setFilteredEvents} />
+      <EventSearch
+        events={events}
+        setFilteredEvents={setFilteredEvents}
+        categories={categories}
+      />
 
       {filteredEvents.length > 0 ? (
         filteredEvents.map((event) => (
