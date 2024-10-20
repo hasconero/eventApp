@@ -1,5 +1,13 @@
 import React from "react";
-import { Heading, Image, Text } from "@chakra-ui/react";
+import {
+  Heading,
+  Image,
+  Text,
+  Box,
+  Stack,
+  SimpleGrid,
+  Center,
+} from "@chakra-ui/react";
 import { useLoaderData } from "react-router-dom";
 
 export const loader = async ({ params }) => {
@@ -28,20 +36,46 @@ export const EventPage = () => {
   const { event, categories, users } = useLoaderData();
 
   return (
-    <div>
-      <Heading color="green.600">Event Details</Heading>
-      <Heading size="md">{event.title}</Heading>
-      <Text>by {users.find((user) => user.id === event.createdBy)?.name}</Text>
-      <Text as="b">{event.description}</Text>
-      <Image src={event.image} alt={event.title} boxSize="300px" />
-      <Text>Start Time: {new Date(event.startTime).toLocaleString()}</Text>
-      <Text>End Time: {new Date(event.endTime).toLocaleString()}</Text>
-      <Text as="i">
-        Categories:{" "}
-        {event.categoryIds
-          .map((id) => categories.find((cat) => cat.id === id)?.name)
-          .join(", ")}
-      </Text>
-    </div>
+    <Center w="100%" maxW="1200px" mx="auto" p={5}>
+      {" "}
+      {/* Same Center and maxW as EventsPage */}
+      <Box w="100%">
+        {" "}
+        {/* Ensure full width of content */}
+        <Heading color="teal.500" mb={6}>
+          Event Details
+        </Heading>
+        {/* SimpleGrid for responsiveness */}
+        <SimpleGrid columns={{ base: 1, md: 2 }} spacing={10}>
+          {/* Event details */}
+          <Stack spacing={4}>
+            <Heading size="lg">{event.title}</Heading>
+            <Text fontSize="lg" fontWeight="bold">
+              by {users.find((user) => user.id === event.createdBy)?.name}
+            </Text>
+            <Text fontSize="md">{event.description}</Text>
+            <Text>
+              Start Time: {new Date(event.startTime).toLocaleString()}
+            </Text>
+            <Text>End Time: {new Date(event.endTime).toLocaleString()}</Text>
+            <Text as="i" color="gray.600">
+              Categories:{" "}
+              {event.categoryIds
+                .map((id) => categories.find((cat) => cat.id === id)?.name)
+                .join(", ")}
+            </Text>
+          </Stack>
+
+          {/* Event image */}
+          <Image
+            src={event.image}
+            alt={event.title}
+            boxSize={{ base: "100%", md: "300px" }} // Responsive sizing
+            borderRadius="md"
+            objectFit="cover"
+          />
+        </SimpleGrid>
+      </Box>
+    </Center>
   );
 };
