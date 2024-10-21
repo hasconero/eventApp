@@ -27,30 +27,32 @@
     },
     {
       "id": 2,
-      "createdBy": 1,
-      "title": "Laser Tag mania",
-      "description": "Let's play laser tag!",
-      "image": "https://www.ctvnews.ca/polopoly_fs/1.5118552.1600965663!/httpImage/image.jpg_gen/derivatives/landscape_1020/image.jpg",
+      "createdBy": 2,
+      "title": "Laser Tag maniacs!",
+      "description": "Let's play laser tag, bitches!",
+      "image": "https://cdn.prod.website-files.com/5ca1479b0620587913fd10e6/5cb2b70b4e45845a5005fd4c_NewShoot_Large-60%20Small%20Cropped.jpg",
       "categoryIds": [
-        2
+        1,
+        3
       ],
       "location": "Blinded by the Lights Laser Tag, 15 Main St.",
-      "startTime": "2023-04-06T18:46",
-      "endTime": "2023-04-06T17:46"
+      "startTime": "2023-04-07T18:46",
+      "endTime": "2023-04-08T17:46"
     },
     {
       "id": 3,
-      "createdBy": 2,
+      "createdBy": 1,
       "title": "Badminton game",
       "description": "Hit that shuttle!",
       "image": "https://wincacademy.github.io/webpages/media/pexels-vladvictoria-2202685.jpg",
       "categoryIds": [
-        1,
-        2
+        2,
+        3,
+        1
       ],
       "location": "The Park",
-      "startTime": "2023-03-15T12:00:00.000Z",
-      "endTime": "2023-03-15T13:30:00.000Z"
+      "startTime": "2024-10-22T18:51",
+      "endTime": "2024-10-23T18:51"
     },
     {
       "id": 4,
@@ -66,13 +68,14 @@
       "endTime": "2023-03-09T07:00:00.000Z"
     },
     {
-      "title": "BBQ",
-      "description": "Put some heat that meat!",
-      "image": "https://i.guim.co.uk/img/media/323787424f69df0165e273dff9226f3145b13607/48_326_2768_1661/master/2768.jpg",
+      "title": "BBQ MF",
+      "description": "Put some more heat on that meat!",
+      "image": "https://fnsharp.com/cdn/shop/articles/backyard-bbq-meat-grilling-guide-850x600_900x.jpg?v=1617738809",
       "startTime": "2024-10-21T16:00",
       "endTime": "2024-10-21T20:00",
       "categoryIds": [
-        3
+        3,
+        1
       ],
       "createdBy": 1,
       "id": 5
