@@ -87,7 +87,13 @@ export const EventPage = () => {
               objectFit="cover"
             />
           ) : (
-            <Text>No image available</Text>
+            <Image
+              src="/placeholder-image.png"
+              alt="No image bro"
+              boxSize={{ base: "100%", md: "300px" }}
+              borderRadius="md"
+              objectFit="cover"
+            />
           )}
         </SimpleGrid>
       </Box>
