@@ -14,16 +14,16 @@
   "events": [
     {
       "id": 1,
-      "createdBy": 1,
+      "createdBy": 2,
       "title": "Trampoline party",
       "description": "Bounce around with your friends",
       "image": "https://i.pinimg.com/736x/3d/2f/af/3d2faf4e3188d34a9fcdc00df59e77b0.jpg",
       "categoryIds": [
-        2
+        1
       ],
       "location": "My back yard",
       "startTime": "2023-03-10T18:00",
-      "endTime": "2023-03-10T17:00:00.000Z"
+      "endTime": "2024-10-31T21:15"
     },
     {
       "id": 2,
@@ -33,7 +33,8 @@
       "image": "https://cdn.prod.website-files.com/5ca1479b0620587913fd10e6/5cb2b70b4e45845a5005fd4c_NewShoot_Large-60%20Small%20Cropped.jpg",
       "categoryIds": [
         1,
-        3
+        3,
+        2
       ],
       "location": "Blinded by the Lights Laser Tag, 15 Main St.",
       "startTime": "2023-04-07T18:46",
@@ -46,9 +47,8 @@
       "description": "Hit that shuttle!",
       "image": "https://wincacademy.github.io/webpages/media/pexels-vladvictoria-2202685.jpg",
       "categoryIds": [
-        2,
-        3,
-        1
+        1,
+        2
       ],
       "location": "The Park",
       "startTime": "2024-10-22T18:51",
@@ -58,14 +58,14 @@
       "id": 4,
       "createdBy": 2,
       "title": "Yoga",
-      "description": "It's a bit of a stretch.",
+      "description": "It's a bit of a stretch!",
       "image": "https://wincacademy.github.io/webpages/media/pexels-gabby-k-5384538.jpg",
       "categoryIds": [
         3
       ],
       "location": "Shavasana Yoga School",
-      "startTime": "2023-03-09T06:00:00.000Z",
-      "endTime": "2023-03-09T07:00:00.000Z"
+      "startTime": "2023-03-09T06:00:00",
+      "endTime": "2023-03-09T07:00:00"
     },
     {
       "title": "BBQ MF",
@@ -106,14 +106,15 @@
     {
       "title": "Koekhappen",
       "description": "Koekhappen! Volgende keer: Poephakken.",
-      "image": "https://images0.persgroep.net/rcs/YA18LcnFbXiZLTOyYIMfu6TxDSA/diocontent/107915994/_fitwidth/694/",
+      "image": "https://lirp.cdn-website.com/0089bdb0/dms3rep/multi/opt/Koekhappen+2-1920w.jpg",
       "startTime": "2024-10-21T22:51",
       "endTime": "2024-10-24T22:51",
       "categoryIds": [
         3,
-        2
+        2,
+        1
       ],
-      "createdBy": "1",
+      "createdBy": 2,
       "id": 8
     },
     {
