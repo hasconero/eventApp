@@ -20,7 +20,7 @@ export const ConfirmationModal = ({
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader>Confirm Action</ModalHeader>
+        <ModalHeader>Confirm delete event</ModalHeader>
         <ModalBody>
           <Text>{message}</Text>
         </ModalBody>
