@@ -1,52 +1,141 @@
-import { useState } from "react";
+import React, { useState } from "react";
+import {
+  Input,
+  FormLabel,
+  CheckboxGroup,
+  Checkbox,
+  Stack,
+  Select,
+  Text,
+} from "@chakra-ui/react";
+import { Button } from "./ui/Button";
 
-export const editEventForm = ({ editEvent }) => {
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [image, setImage] = useState("");
-  const [startTime, setStartTime] = useState("");
-  const [endTime, setEndTime] = useState("");
-  const [categories, setCategories] = useState("");
+export const EditEventForm = ({
+  event,
+  categories,
+  users,
+  onSubmit,
+  onClose,
+}) => {
+  const [updatedEvent, setUpdatedEvent] = useState({
+    ...event,
+    categoryIds: event.categoryIds.map(String), // Convert categoryIds to strings
+    startTime: event.startTime ? event.startTime.split(".")[0] : "",
+    endTime: event.endTime ? event.endTime.split(".")[0] : "",
+  });
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setUpdatedEvent((prevEvent) => ({
+      ...prevEvent,
+      [name]: name === "createdBy" ? Number(value) : value,
+    }));
+  };
 
-    // An async function, but no need to wait for it.
-    editEvent({ title, description, image, startTime, endTime, categories });
+  const handleCategoryChange = (categoryId) => {
+    setUpdatedEvent((prevEvent) => {
+      const categoryIds = prevEvent.categoryIds.includes(String(categoryId))
+        ? prevEvent.categoryIds.filter((id) => id !== String(categoryId))
+        : [...prevEvent.categoryIds, String(categoryId)]; // Convert to string
+      return {
+        ...prevEvent,
+        categoryIds,
+      };
+    });
+  };
 
-    // Empty the form fields.
-    setTitle("");
-    setDescription("");
-    setImage("");
-    setStartTime("");
-    setEndTime("");
-    setCategories("");
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    // Convert categoryIds back to numbers before submitting
+    const updatedEventWithNumberIds = {
+      ...updatedEvent,
+      categoryIds: updatedEvent.categoryIds.map(Number),
+    };
+    onSubmit(updatedEventWithNumberIds);
+    onClose();
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        type="text"
-        required="required"
-        placeholder="name"
-        onChange={(e) => setName(e.target.value)}
-        value={name}
+    <form onSubmit={handleFormSubmit}>
+      <FormLabel>Creator</FormLabel>
+      <Select
+        placeholder="Select Creator"
+        name="createdBy"
+        value={updatedEvent.createdBy}
+        onChange={handleInputChange}
+      >
+        {users.map((user) => (
+          <option key={user.id} value={user.id}>
+            {user.name}
+          </option>
+        ))}
+      </Select>
+
+      <FormLabel>Event Title</FormLabel>
+      <Input
+        placeholder="Title"
+        name="title"
+        value={updatedEvent.title}
+        onChange={handleInputChange}
       />
-      <input
-        type="email"
-        required="required"
-        placeholder="email"
-        onChange={(e) => setEmail(e.target.value)}
-        value={email}
+
+      <FormLabel>Description</FormLabel>
+      <Input
+        placeholder="Description"
+        name="description"
+        value={updatedEvent.description}
+        onChange={handleInputChange}
       />
-      <input
-        type="url"
-        required="required"
-        placeholder="website"
-        onChange={(e) => setWebsite(e.target.value)}
-        value={website}
+
+      <FormLabel>Image URL</FormLabel>
+      <Input
+        placeholder="Image URL"
+        name="image"
+        value={updatedEvent.image}
+        onChange={handleInputChange}
       />
-      <button type="submit">Add user</button>
+
+      <FormLabel>Start Time</FormLabel>
+      <Input
+        type="datetime-local"
+        name="startTime"
+        value={updatedEvent.startTime}
+        onChange={handleInputChange}
+      />
+
+      <FormLabel>End Time</FormLabel>
+      <Input
+        type="datetime-local"
+        name="endTime"
+        value={updatedEvent.endTime}
+        onChange={handleInputChange}
+      />
+
+      <FormLabel>Select Categories</FormLabel>
+      <CheckboxGroup>
+        <Stack>
+          {categories.length > 0 ? (
+            categories.map((category) => (
+              <Checkbox
+                key={category.id}
+                value={String(category.id)} // Convert to string
+                onChange={() => handleCategoryChange(category.id)}
+                isChecked={updatedEvent.categoryIds.includes(
+                  String(category.id)
+                )} // Check by string
+              >
+                {category.name}
+              </Checkbox>
+            ))
+          ) : (
+            <Text>No categories available</Text>
+          )}
+        </Stack>
+      </CheckboxGroup>
+
+      <Button colorScheme="teal" type="submit" mt={4}>
+        Save Event
+      </Button>
     </form>
   );
 };
