@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Heading,
   Image,
@@ -11,6 +11,7 @@ import {
   Button,
 } from "@chakra-ui/react";
 import { useLoaderData, Link as RouterLink } from "react-router-dom";
+import { EditEventModal } from "../components/EditEventModal";
 
 export const loader = async ({ params }) => {
   const users = await fetch("http://localhost:3000/users");
@@ -36,9 +37,27 @@ export const loader = async ({ params }) => {
 
 export const EventPage = () => {
   const { event, categories, users } = useLoaderData();
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // Find the creator based on the createdBy field
   const creator = users.find((user) => user.id === event.createdBy);
+
+  const handleEditEvent = async (updatedEvent) => {
+    try {
+      const response = await fetch(`http://localhost:3000/events/${event.id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(updatedEvent),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to update event");
+      }
+    } catch (error) {
+      console.error("Error updating event:", error);
+    }
+  };
 
   return (
     <Center w="100%" maxW="1200px" mx="auto" p={5}>
@@ -52,15 +71,16 @@ export const EventPage = () => {
           <Stack spacing={4}>
             <Heading size="lg">{event.title}</Heading>
 
-            {/* Display creator's name and image */}
             <Stack direction="row" spacing={4} alignItems="center">
-              <Image
-                src={creator?.image}
-                alt={creator?.name}
-                boxSize="50px"
-                borderRadius="full"
-                objectFit="cover"
-              />
+              {creator?.image && (
+                <Image
+                  src={creator.image}
+                  alt={creator.name}
+                  boxSize="50px"
+                  borderRadius="full"
+                  objectFit="cover"
+                />
+              )}
               <Text fontSize="lg" fontWeight="bold">
                 by {creator?.name}
               </Text>
@@ -88,6 +108,21 @@ export const EventPage = () => {
             <Button as={RouterLink} to="/" colorScheme="teal" mb={4}>
               Back to Events
             </Button>
+
+            {/* Edit Event Button */}
+            <Button onClick={() => setIsModalOpen(true)} colorScheme="blue">
+              Edit Event
+            </Button>
+
+            {/* Edit Event Modal */}
+            <EditEventModal
+              isOpen={isModalOpen}
+              onClose={() => setIsModalOpen(false)}
+              event={event}
+              categories={categories}
+              users={users}
+              onSubmit={handleEditEvent} // Pass the edit handler
+            />
           </Stack>
 
           {event.image ? (
