@@ -6,26 +6,24 @@ export const Navigation = () => {
   return (
     <Box bg="teal.500" px={4} mb={6}>
       <Flex h={16} alignItems="center" justifyContent="flex-start">
-        {/* Left-aligned Heading (Logo) */}
         <Heading
           as={RouterLink}
           to="/"
           size="lg"
           color="white"
           _hover={{ textDecoration: "none" }}
-          mr={16} // Adds spacing between logo and links
+          mr={16}
         >
           Event Manager
         </Heading>
 
-        {/* Left-aligned Navigation Links */}
         <HStack as="nav" spacing={10}>
           <Link
             as={RouterNavLink}
             to="/"
             color="white"
             _hover={{ textDecoration: "none", color: "teal.200" }}
-            _activeLink={{ color: "teal.200", fontWeight: "bold" }} // Active link styling
+            _activeLink={{ color: "teal.200", fontWeight: "bold" }}
             end
           >
             Events
@@ -36,7 +34,7 @@ export const Navigation = () => {
             to="/event/1"
             color="white"
             _hover={{ textDecoration: "none", color: "teal.200" }}
-            _activeLink={{ color: "teal.200", fontWeight: "bold" }} // Active link styling
+            _activeLink={{ color: "teal.200", fontWeight: "bold" }}
           >
             Event
           </Link>

@@ -10,18 +10,18 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import { Button } from "./ui/Button";
-import { useNavigate } from "react-router-dom"; // To navigate after the form is submitted
+import { useNavigate } from "react-router-dom";
 
 export const EditEventForm = ({ event, categories, users, onSubmit }) => {
   const [updatedEvent, setUpdatedEvent] = useState({
     ...event,
-    categoryIds: event.categoryIds.map(String), // Ensure categoryIds are treated as strings
+    categoryIds: event.categoryIds.map(String),
     startTime: event.startTime ? event.startTime.split(".")[0] : "",
     endTime: event.endTime ? event.endTime.split(".")[0] : "",
   });
 
-  const toast = useToast(); // For showing success or failure messages
-  const navigate = useNavigate(); // For redirecting the user
+  const toast = useToast();
+  const navigate = useNavigate();
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -34,7 +34,7 @@ export const EditEventForm = ({ event, categories, users, onSubmit }) => {
   const handleCategoryChange = (categoryIds) => {
     setUpdatedEvent((prevEvent) => ({
       ...prevEvent,
-      categoryIds, // Directly update the categoryIds array
+      categoryIds,
     }));
   };
 
@@ -45,10 +45,8 @@ export const EditEventForm = ({ event, categories, users, onSubmit }) => {
       categoryIds: updatedEvent.categoryIds.map(Number),
     };
     try {
-      // Assuming onSubmit returns a Promise
       await onSubmit(updatedEventWithNumberIds);
 
-      // Show a success toast
       toast({
         title: "Event updated successfully!",
         status: "success",
@@ -56,12 +54,10 @@ export const EditEventForm = ({ event, categories, users, onSubmit }) => {
         isClosable: true,
       });
 
-      // Redirect to the EventsPage after a delay (so the user sees the toast)
       setTimeout(() => {
-        navigate("/"); // Redirect to the EventsPage
-      }, 3000); // Short delay before redirection
+        navigate("/");
+      }, 2000);
     } catch (error) {
-      // Show an error toast if something goes wrong
       toast({
         title: "Failed to update event.",
         description:
@@ -131,16 +127,13 @@ export const EditEventForm = ({ event, categories, users, onSubmit }) => {
 
       <FormLabel>Select Categories</FormLabel>
       <CheckboxGroup
-        value={updatedEvent.categoryIds} // Bind directly to state
-        onChange={handleCategoryChange} // Set category IDs on change
+        value={updatedEvent.categoryIds}
+        onChange={handleCategoryChange}
       >
         <Stack>
           {categories.length > 0 ? (
             categories.map((category) => (
-              <Checkbox
-                key={category.id}
-                value={String(category.id)} // Ensure it's a string
-              >
+              <Checkbox key={category.id} value={String(category.id)}>
                 {category.name}
               </Checkbox>
             ))

@@ -17,7 +17,7 @@ import {
   useNavigate,
 } from "react-router-dom";
 import { EditEventModal } from "../components/EditEventModal";
-import { ConfirmationModal } from "../components/ConfirmationModal"; // Import the ConfirmationModal
+import { ConfirmationModal } from "../components/ConfirmationModal";
 
 export const loader = async ({ params }) => {
   const users = await fetch("http://localhost:3000/users");
@@ -44,7 +44,7 @@ export const loader = async ({ params }) => {
 export const EventPage = () => {
   const { event, categories, users } = useLoaderData();
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isConfirmOpen, setIsConfirmOpen] = useState(false); // State to control confirmation modal
+  const [isConfirmOpen, setIsConfirmOpen] = useState(false);
   const toast = useToast();
   const navigate = useNavigate();
 
@@ -68,7 +68,6 @@ export const EventPage = () => {
     }
   };
 
-  // Function to handle the event deletion
   const handleDeleteEvent = async () => {
     try {
       const response = await fetch(`http://localhost:3000/events/${event.id}`, {
@@ -86,7 +85,6 @@ export const EventPage = () => {
         isClosable: true,
       });
 
-      // Redirect to the EventsPage after deletion
       navigate("/");
     } catch (error) {
       console.error("Error deleting event:", error);
@@ -108,7 +106,6 @@ export const EventPage = () => {
         </Heading>
 
         <SimpleGrid columns={{ base: 1, md: 2 }} spacing={10}>
-          {/* Event details */}
           <Stack spacing={4}>
             <Heading size="lg">{event.title}</Heading>
 
@@ -148,16 +145,11 @@ export const EventPage = () => {
               })}
             </Text>
 
-            {/* Edit Event Button */}
             <Button onClick={() => setIsModalOpen(true)} colorScheme="blue">
               Edit Event
             </Button>
 
-            {/* Delete Event Button */}
-            <Button
-              onClick={() => setIsConfirmOpen(true)} // Show confirmation modal
-              colorScheme="red"
-            >
+            <Button onClick={() => setIsConfirmOpen(true)} colorScheme="red">
               Delete Event
             </Button>
 
@@ -165,7 +157,6 @@ export const EventPage = () => {
               Back to Events
             </Button>
 
-            {/* Edit Event Modal */}
             <EditEventModal
               isOpen={isModalOpen}
               onClose={() => setIsModalOpen(false)}
@@ -175,7 +166,6 @@ export const EventPage = () => {
               onSubmit={handleEditEvent}
             />
 
-            {/* Confirmation Modal for Delete */}
             <ConfirmationModal
               isOpen={isConfirmOpen}
               onClose={() => setIsConfirmOpen(false)}

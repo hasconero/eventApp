@@ -7,6 +7,7 @@ import {
   Box,
   SimpleGrid,
   Tag,
+  useToast,
 } from "@chakra-ui/react";
 import { useLoaderData, Link } from "react-router-dom";
 import { EventSearch } from "../components/EventSearch";
@@ -28,9 +29,9 @@ export const loader = async () => {
 export const EventsPage = () => {
   const { users, events, categories } = useLoaderData();
   const [filteredEvents, setFilteredEvents] = useState(events);
-  const [isModalOpen, setIsModalOpen] = useState(false); // Manage modal state
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const toast = useToast();
 
-  // Handle adding new event (POST to server)
   const handleAddEvent = async (newEvent) => {
     console.log(newEvent);
     try {
@@ -43,17 +44,31 @@ export const EventsPage = () => {
       });
       if (response.ok) {
         const addedEvent = await response.json();
-        setFilteredEvents([...filteredEvents, addedEvent]); // Update the displayed events list
+        setFilteredEvents([...filteredEvents, addedEvent]);
+        toast({
+          title: "Event added successfully.",
+          status: "success",
+          duration: 3000,
+          isClosable: true,
+        });
+        setIsModalOpen(false);
       }
     } catch (error) {
       console.error("Error adding event:", error);
+      toast({
+        title: "Failed to add event.",
+        description: error.message,
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
     }
   };
 
   const getCategories = (categoryIds) => {
     return categoryIds
       .map((id) => categories.find((cat) => cat.id === id)?.name)
-      .filter(Boolean) // Filter out any undefined names
+      .filter(Boolean)
       .map((categoryName) => (
         <Tag key={categoryName} colorScheme="teal" mr={2}>
           {categoryName}
@@ -64,36 +79,30 @@ export const EventsPage = () => {
   return (
     <Center w="100%" maxW="1200px" mx="auto" p={5}>
       {" "}
-      {/* Same Center and maxW */}
       <Box w="100%" px={{ base: 4, md: 8 }} py={5}>
         {" "}
-        {/* Ensure full width of content */}
         <Heading color="teal.500" mb={6}>
           List of events
         </Heading>
-        {/* EventSearch component */}
         <EventSearch
           events={events}
           setFilteredEvents={setFilteredEvents}
           categories={categories}
         />
-        {/* Add Event Button */}
         <Button onClick={() => setIsModalOpen(true)} mb={{ base: 4, md: 6 }}>
           Add Event
         </Button>
-        {/* Modal for adding new events */}
         <AddEventModal
           isOpen={isModalOpen}
           onClose={() => setIsModalOpen(false)}
           onSubmit={handleAddEvent}
-          categories={categories} // Pass categories to the modal
+          categories={categories}
           users={users}
         />
-        {/* Display events as a responsive grid */}
         {filteredEvents.length > 0 ? (
           <SimpleGrid
             columns={{ base: 1, sm: 2, md: 3 }}
-            spacing={{ base: 4, sm: 6, md: 8 }} // More spacing control
+            spacing={{ base: 4, sm: 6, md: 8 }}
             w="100%"
             maxW="1200px"
           >
@@ -129,16 +138,16 @@ export const EventsPage = () => {
                   <Image
                     src={event.image}
                     alt={event.title}
-                    boxSize={{ base: "150px", sm: "200px", md: "150px" }} // Resize for smaller screens
+                    boxSize={{ base: "150px", sm: "200px", md: "150px" }}
                     objectFit="cover"
-                    borderRadius="md" // Add this for rounded corners
+                    borderRadius="md"
                     mb={2}
                   />
                 ) : (
                   <Text mb={8}>No image available</Text>
                 )}
                 <Text
-                  fontSize={{ base: "xs", sm: "sm", md: "md" }} // Responsive text size
+                  fontSize={{ base: "xs", sm: "sm", md: "md" }}
                   whiteSpace="normal"
                   wordBreak="break-word"
                   mb={2}
@@ -147,7 +156,7 @@ export const EventsPage = () => {
                   Start Time: {new Date(event.startTime).toLocaleString()}
                 </Text>
                 <Text
-                  fontSize={{ base: "xs", sm: "sm", md: "md" }} // Responsive text size
+                  fontSize={{ base: "xs", sm: "sm", md: "md" }}
                   whiteSpace="normal"
                   wordBreak="break-word"
                   mb={2}

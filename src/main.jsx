@@ -20,12 +20,10 @@ const router = createBrowserRouter([
         path: "/event/:eventId",
         element: <EventPage />,
         loader: eventLoader,
-        // action: addEvent,
       },
     ],
   },
 ]);
-// @ts-ignore
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <ChakraProvider>

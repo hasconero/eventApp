@@ -26,7 +26,6 @@ export const EditEventModal = ({
         <ModalHeader>Edit Event</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
-          {/* Pass current event data to the form */}
           <EditEventForm
             event={event}
             categories={categories}
