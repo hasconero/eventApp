@@ -9,9 +9,15 @@ import {
   Center,
   Tag,
   Button,
+  useToast,
 } from "@chakra-ui/react";
-import { useLoaderData, Link as RouterLink } from "react-router-dom";
+import {
+  useLoaderData,
+  Link as RouterLink,
+  useNavigate,
+} from "react-router-dom";
 import { EditEventModal } from "../components/EditEventModal";
+import { ConfirmationModal } from "../components/ConfirmationModal"; // Import the ConfirmationModal
 
 export const loader = async ({ params }) => {
   const users = await fetch("http://localhost:3000/users");
@@ -38,6 +44,9 @@ export const loader = async ({ params }) => {
 export const EventPage = () => {
   const { event, categories, users } = useLoaderData();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isConfirmOpen, setIsConfirmOpen] = useState(false); // State to control confirmation modal
+  const toast = useToast();
+  const navigate = useNavigate();
 
   const creator = users.find((user) => user.id === event.createdBy);
 
@@ -56,6 +65,38 @@ export const EventPage = () => {
       }
     } catch (error) {
       console.error("Error updating event:", error);
+    }
+  };
+
+  // Function to handle the event deletion
+  const handleDeleteEvent = async () => {
+    try {
+      const response = await fetch(`http://localhost:3000/events/${event.id}`, {
+        method: "DELETE",
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to delete event");
+      }
+
+      toast({
+        title: "Event deleted successfully.",
+        status: "success",
+        duration: 3000,
+        isClosable: true,
+      });
+
+      // Redirect to the EventsPage after deletion
+      navigate("/");
+    } catch (error) {
+      console.error("Error deleting event:", error);
+      toast({
+        title: "Failed to delete event.",
+        description: error.message,
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
     }
   };
 
@@ -105,13 +146,21 @@ export const EventPage = () => {
               })}
             </Text>
 
-            <Button as={RouterLink} to="/" colorScheme="teal" mb={4}>
-              Back to Events
-            </Button>
-
             {/* Edit Event Button */}
             <Button onClick={() => setIsModalOpen(true)} colorScheme="blue">
               Edit Event
+            </Button>
+
+            {/* Delete Event Button */}
+            <Button
+              onClick={() => setIsConfirmOpen(true)} // Show confirmation modal
+              colorScheme="red"
+            >
+              Delete Event
+            </Button>
+
+            <Button as={RouterLink} to="/" colorScheme="teal" mb={4}>
+              Back to Events
             </Button>
 
             {/* Edit Event Modal */}
@@ -121,7 +170,15 @@ export const EventPage = () => {
               event={event}
               categories={categories}
               users={users}
-              onSubmit={handleEditEvent} // Pass the edit handler
+              onSubmit={handleEditEvent}
+            />
+
+            {/* Confirmation Modal for Delete */}
+            <ConfirmationModal
+              isOpen={isConfirmOpen}
+              onClose={() => setIsConfirmOpen(false)}
+              onConfirm={handleDeleteEvent}
+              message="Are you sure you want to delete this event? This action cannot be undone."
             />
           </Stack>
 
