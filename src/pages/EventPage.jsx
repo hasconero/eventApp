@@ -37,24 +37,35 @@ export const loader = async ({ params }) => {
 export const EventPage = () => {
   const { event, categories, users } = useLoaderData();
 
+  // Find the creator based on the createdBy field
+  const creator = users.find((user) => user.id === event.createdBy);
+
   return (
     <Center w="100%" maxW="1200px" mx="auto" p={5}>
-      {" "}
-      {/* Same Center and maxW as EventsPage */}
       <Box w="100%">
-        {" "}
-        {/* Ensure full width of content */}
         <Heading color="teal.500" mb={6}>
           Event Details
         </Heading>
-        {/* SimpleGrid for responsiveness */}
+
         <SimpleGrid columns={{ base: 1, md: 2 }} spacing={10}>
           {/* Event details */}
           <Stack spacing={4}>
             <Heading size="lg">{event.title}</Heading>
-            <Text fontSize="lg" fontWeight="bold">
-              by {users.find((user) => user.id === event.createdBy)?.name}
-            </Text>
+
+            {/* Display creator's name and image */}
+            <Stack direction="row" spacing={4} alignItems="center">
+              <Image
+                src={creator?.image}
+                alt={creator?.name}
+                boxSize="50px"
+                borderRadius="full"
+                objectFit="cover"
+              />
+              <Text fontSize="lg" fontWeight="bold">
+                by {creator?.name}
+              </Text>
+            </Stack>
+
             <Text fontSize="md">{event.description}</Text>
             <Text>
               Start Time: {new Date(event.startTime).toLocaleString()}
@@ -73,6 +84,7 @@ export const EventPage = () => {
                 ) : null;
               })}
             </Text>
+
             <Button as={RouterLink} to="/" colorScheme="teal" mb={4}>
               Back to Events
             </Button>
@@ -89,7 +101,7 @@ export const EventPage = () => {
           ) : (
             <Image
               src="/placeholder-image.png"
-              alt="No image bro"
+              alt="No image available"
               boxSize={{ base: "100%", md: "300px" }}
               borderRadius="md"
               objectFit="cover"
