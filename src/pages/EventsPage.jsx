@@ -78,7 +78,7 @@ export const EventsPage = () => {
           categories={categories}
         />
         {/* Add Event Button */}
-        <Button onClick={() => setIsModalOpen(true)} mb={6}>
+        <Button onClick={() => setIsModalOpen(true)} mb={{ base: 4, md: 6 }}>
           Add Event
         </Button>
         {/* Modal for adding new events */}
@@ -92,8 +92,8 @@ export const EventsPage = () => {
         {/* Display events as a responsive grid */}
         {filteredEvents.length > 0 ? (
           <SimpleGrid
-            columns={{ base: 1, sm: 2, md: 3 }} // 1 column for base (mobile), 2 for small screens, 3 for medium and up
-            spacing={6}
+            columns={{ base: 1, sm: 2, md: 3 }}
+            spacing={{ base: 4, sm: 6, md: 8 }} // More spacing control
             w="100%"
             maxW="1200px"
           >
@@ -121,7 +121,7 @@ export const EventsPage = () => {
                 >
                   {event.description}
                 </Text>
-                <Text fontSize={{ base: "xs", md: "md" }}>
+                <Text mb={2} fontSize={{ base: "xs", md: "md" }}>
                   Created by:{" "}
                   {users.find((user) => event.createdBy === user.id)?.name}
                 </Text>
@@ -131,15 +131,28 @@ export const EventsPage = () => {
                     alt={event.title}
                     boxSize={{ base: "150px", sm: "200px", md: "150px" }} // Resize for smaller screens
                     objectFit="cover"
+                    borderRadius="md" // Add this for rounded corners
                     mb={2}
                   />
                 ) : (
                   <Text mb={8}>No image available</Text>
                 )}
-                <Text whiteSpace="normal" wordWrap="break-word">
+                <Text
+                  fontSize={{ base: "xs", sm: "sm", md: "md" }} // Responsive text size
+                  whiteSpace="normal"
+                  wordBreak="break-word"
+                  mb={2}
+                >
+                  {" "}
                   Start Time: {new Date(event.startTime).toLocaleString()}
                 </Text>
-                <Text whiteSpace="normal" wordWrap="break-word">
+                <Text
+                  fontSize={{ base: "xs", sm: "sm", md: "md" }} // Responsive text size
+                  whiteSpace="normal"
+                  wordBreak="break-word"
+                  mb={2}
+                >
+                  {" "}
                   End Time: {new Date(event.endTime).toLocaleString()}
                 </Text>
 
