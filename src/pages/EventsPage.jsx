@@ -65,7 +65,7 @@ export const EventsPage = () => {
     <Center w="100%" maxW="1200px" mx="auto" p={5}>
       {" "}
       {/* Same Center and maxW */}
-      <Box w="100%">
+      <Box w="100%" px={{ base: 4, md: 8 }} py={5}>
         {" "}
         {/* Ensure full width of content */}
         <Heading color="teal.500" mb={6}>
@@ -92,7 +92,7 @@ export const EventsPage = () => {
         {/* Display events as a responsive grid */}
         {filteredEvents.length > 0 ? (
           <SimpleGrid
-            columns={{ base: 1, md: 3 }}
+            columns={{ base: 1, sm: 2, md: 3 }} // 1 column for base (mobile), 2 for small screens, 3 for medium and up
             spacing={6}
             w="100%"
             maxW="1200px"
@@ -100,40 +100,49 @@ export const EventsPage = () => {
             {filteredEvents.map((event) => (
               <Box
                 key={event.id}
-                p={5}
+                p={{ base: 3, md: 5 }}
                 shadow="md"
                 borderWidth="1px"
                 borderRadius="lg"
               >
                 <Link to={`event/${event.id}`}>
-                  <Heading size="md" mb={2}>
+                  <Heading
+                    color="teal.500"
+                    size={{ base: "sm", md: "md" }}
+                    mb={2}
+                  >
                     {event.title}
                   </Heading>
                 </Link>
-                <Text fontWeight="bold" mb={2}>
+                <Text
+                  fontWeight="bold"
+                  fontSize={{ base: "sm", md: "md" }}
+                  mb={2}
+                >
                   {event.description}
                 </Text>
-                <Text mb={2}>
+                <Text fontSize={{ base: "xs", md: "md" }}>
                   Created by:{" "}
                   {users.find((user) => event.createdBy === user.id)?.name}
                 </Text>
-
                 {event.image ? (
                   <Image
                     src={event.image}
                     alt={event.title}
-                    boxSize={{ base: "100%", md: "150px" }}
+                    boxSize={{ base: "150px", sm: "200px", md: "150px" }} // Resize for smaller screens
+                    objectFit="cover"
                     mb={2}
                   />
                 ) : (
                   <Text mb={8}>No image available</Text>
                 )}
-                <Text>
+                <Text whiteSpace="normal" wordWrap="break-word">
                   Start Time: {new Date(event.startTime).toLocaleString()}
                 </Text>
-                <Text>
+                <Text whiteSpace="normal" wordWrap="break-word">
                   End Time: {new Date(event.endTime).toLocaleString()}
                 </Text>
+
                 <Text as="i" color="gray.600">
                   Categories: {getCategories(event.categoryIds)}
                 </Text>

@@ -127,7 +127,9 @@ export const EventPage = () => {
               </Text>
             </Stack>
 
-            <Text fontSize="md">{event.description}</Text>
+            <Text fontWeight="bold" fontSize="md">
+              {event.description}
+            </Text>
             <Text>
               Start Time: {new Date(event.startTime).toLocaleString()}
             </Text>
